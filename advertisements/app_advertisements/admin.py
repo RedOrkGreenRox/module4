@@ -28,7 +28,7 @@ class AdvertisementAdmin(admin.ModelAdmin):
     @admin.display(description='Изображение')
     def img(self, obj):
         return format_html(f'<img src="{obj.image.url}" style="max-width:200px; max-height:200px"/>') if obj.image else\
-            format_html('<img src="advertisement/static/img/adv.png" style='
+            format_html('<img src="../../../static/img/adv.png" style='
                         '"max-width:200px; max-height:200px"/>')
 
 admin.site.register(Advertisement, AdvertisementAdmin)
