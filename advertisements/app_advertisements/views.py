@@ -1,5 +1,6 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from .forms import AdvertisementForm
 from .models import Advertisement
 
 
@@ -11,3 +12,17 @@ def index(request):
 
 def top_sellers(request):
     return render(request, 'top-sellers.html')
+
+
+def advertisement_post(request):
+    if request.method == 'POST':
+        form = AdvertisementForm(request.POST, request.FILES)
+        if form.is_valid():
+            advertisement = Advertisement(**form.cleaned_data)
+            advertisement.user = request.user
+            url = reverse('main-page')
+            return redirect(url)
+    else:
+        form = AdvertisementForm()
+    context = {'form': form}
+    return render(request, 'advertisement-post.html', context)
