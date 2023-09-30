@@ -15,11 +15,15 @@ def top_sellers(request):
 
 
 def advertisement_post(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = AdvertisementForm(request.POST, request.FILES)
         if form.is_valid():
             advertisement = Advertisement(**form.cleaned_data)
             advertisement.user = request.user
+            if advertisement.title[0] != '?':
+
+                form.clean()
+            advertisement.save()
             url = reverse('main-page')
             return redirect(url)
     else:
