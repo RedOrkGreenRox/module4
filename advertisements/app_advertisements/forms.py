@@ -8,7 +8,7 @@ def question(title):
         raise ValidationError('Заголовок не может начинаться с "?"')
 
 
-def notnegative(price):
+def not_negative(price):
     if price < 1:
         raise ValidationError('Цена не может быть ниже 1')
 
@@ -19,7 +19,7 @@ class AdvertisementForm(forms.ModelForm):
                             widget=forms.TextInput(attrs={'class': 'form-control form-control-lg'}))
     description = forms.CharField(required=False,
                                   widget=forms.Textarea(attrs={'class': 'form-control form-control-lg'}))
-    price = forms.DecimalField(validators=[notnegative],
+    price = forms.DecimalField(validators=[not_negative],
                                widget=forms.NumberInput(attrs={'class': 'form-control form-control-lg'}))
     auction = forms.BooleanField(required=False,
                                  widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
