@@ -74,6 +74,6 @@ def register_view(request):
     context = {
         'form': form
     }
-    return render(request, 'register.html', context)
+    return render(request, 'app_auth/register.html', context)
 
 
