@@ -10,24 +10,14 @@ active
 {% endblock %}
 {% block content %}
   <div class="row">
-    <div class="col" style="margin: 50px;">
+    <div class="col" style="margin: 150px;">
       <div class="display-2">
-        <span class="badge bg-primary">Страница</span>
-      </div>
-    </div>
-    <div class="col" style="margin: 50px;">
-      <div class="display-2">
-        <span class="badge bg-primary">регистрации</span>
-      </div>
-    </div>
-    <div class="col" style="margin: 50px;">
-      <div class="display-2">
-        <span class="badge bg-primary">пользователя</span>
+        <span class="badge bg-primary">Страница регистрации пользователя</span>
       </div>
     </div>
   </div>
   <div class="container">
-    <form method="post">
+    <form method="post"> {% csrf_token %}
       <div class="row mb-3">
         <div class="col">
           <label class="col-sm-4 col-form-label offset-4">Username</label>

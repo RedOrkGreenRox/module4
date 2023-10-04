@@ -10,19 +10,9 @@ active
 {% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col" style="margin: 50px;">
+    <div class="col" style="margin: 150px;">
         <div class="display-2">
-            <span class="badge bg-primary">Страница</span>
-        </div>
-    </div>
-    <div class="col" style="margin: 50px;">
-        <div class="display-2">
-            <span class="badge bg-primary">авторизации</span>
-        </div>
-    </div>
-    <div class="col" style="margin: 50px;">
-        <div class="display-2">
-            <span class="badge bg-primary">пользователя</span>
+            <span class="badge bg-primary">Страница авторизации пользователя</span>
         </div>
     </div>
 </div>
@@ -31,7 +21,7 @@ active
     <div class="col-sm-4 offset-4 w-25">
         <div class="form-label bg-warning" style="margin: 10px 0px;">{{ error }}</div>
     </div>
-    {% end if %}
+    {% endif %}
     <form method="post"> {% csrf_token %}
         <div class="row mb-3">
             <div class="col">

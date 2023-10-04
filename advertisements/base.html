@@ -24,13 +24,13 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {% block post %}{% endblock %}" href="{% url 'auth' %}">
+        <a class="nav-link {% block post %}{% endblock %}" href="{% url 'adv-post' %}">
             <span style="font-weight: bold;">Разместить объявление</span>
         </a>
     </li>
     {% if not request.user.is_authenticated %}
     <li class="nav-item">
-        <a class="nav-link {% block registration %}{% endblock %}" href="register.html">
+        <a class="nav-link {% block registration %}{% endblock %}" href="{% url 'register' %}">
             <span style="font-weight: bold;">Регистрация</span>
         </a>
     </li>
@@ -46,7 +46,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {% block exit %}{% endblock %}" href="#">
+        <a class="nav-link {% block exit %}{% endblock %}" href="{% url 'logout' %}">
             <span style="font-weight: bold;">Выйти</span>
         </a>
     </li>
