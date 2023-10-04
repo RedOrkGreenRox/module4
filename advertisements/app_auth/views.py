@@ -31,4 +31,4 @@ def profile_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('main')
+    return redirect(reverse('login'))
