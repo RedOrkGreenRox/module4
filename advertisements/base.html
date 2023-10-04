@@ -24,22 +24,24 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {% block post %}{% endblock %}" href="{% url 'adv-post' %}">
+        <a class="nav-link {% block post %}{% endblock %}" href="{% url 'auth' %}">
             <span style="font-weight: bold;">Разместить объявление</span>
         </a>
     </li>
+    {% if not request.user.is_authenticated %}
     <li class="nav-item">
         <a class="nav-link {% block registration %}{% endblock %}" href="register.html">
             <span style="font-weight: bold;">Регистрация</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {% block login %}{% endblock %}" href="login.html">
+        <a class="nav-link {% block login %}{% endblock %}" href="{% url 'login' %}">
             <span style="font-weight: bold;">Войти</span>
         </a>
     </li>
+    {% else %}
     <li class="nav-item">
-        <a class="nav-link {% block profile %}{% endblock %}" href="profile.html">
+        <a class="nav-link {% block profile %}{% endblock %}" href="{% url 'auth' %}">
             <span style="font-weight: bold;">Профиль</span>
         </a>
     </li>
@@ -48,6 +50,7 @@
             <span style="font-weight: bold;">Выйти</span>
         </a>
     </li>
+    {% endif %}
 </ul>
 {% block content %}
 {% endblock %}
