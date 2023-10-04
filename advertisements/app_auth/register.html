@@ -1,71 +1,88 @@
 {% extends 'base.html' %}
-{% load static %}
 
-<body>
 {% block title %}
 Регистрация
 {% endblock %}
-{% block register %}
-active
-{% endblock %}
+
 {% block content %}
+  <ul class="nav nav-pills sticky-top bg-dark nav-fill">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'main-page' %}">
+        <span style="font-weight: bold; color: #00FF00">Главная</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'top-sellers' %}"><span style="font-weight: bold; color: #00FF00">Топ продавцов</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'adv-post' %}">
+        <span style="font-weight: bold; color: #00FF00">Разместить объявление</span>
+      </a>
+    </li>
+    {% if not user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'register' %}">
+        <span style="font-weight: bold; color: #00FF00">Регистрация</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'login' %}">
+        <span style="font-weight: bold; color: #00FF00">Войти</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'profile' %}">
+        <span style="font-weight: bold; color: #00FF00">Профиль</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'logout' %}">
+        <span style="font-weight: bold; color: #00FF00">Выйти</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+
   <div class="row">
-    <div class="col" style="margin: 150px;">
+    <div class="col" style="margin: 50px;">
       <div class="display-2">
-        <span class="badge bg-primary">Страница регистрации пользователя</span>
+        <span class="badge bg-dark">Страница</span>
+      </div>
+    </div>
+    <div class="col" style="margin: 50px;">
+      <div class="display-2">
+        <span class="badge bg-dark">регистрации</span>
+      </div>
+    </div>
+    <div class="col" style="margin: 50px;">
+      <div class="display-2">
+        <span class="badge bg-dark">пользователя</span>
       </div>
     </div>
   </div>
-  <div class="container">
-    <form method="post"> {% csrf_token %}
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Username</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="text" class="form-control form-control-lg">
-          </div>
+<div class="container">
+  {{ form.non_field.errors }}
+  <form method="post"> {% csrf_token %}
+    {% for field in form %}
+    <div class="row mb-3">
+      <div class="col">
+        <label class="col-sm-4 col-form-label offset-4">{{ field.label }}</label>
+        <div class="col-sm-4 offset-4 w-25">
+          {{ field }}
+          {% if field.errors %}
+          <div class="form-label bg-warning" style="margin: 10px 0px;"> {{ field.errors }}</div>
+          {% endif %}
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Name</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="text" class="form-control form-control-lg">
-          </div>
-        </div>
+    </div>
+    {% endfor %}
+    <div class="row mb-3 offset-sm-5">
+      <div class="col">
+        <button type="submit" class="btn btn-success">Принять</button>
       </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Surname</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="text" class="form-control form-control-lg">
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Password</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="password" class="form-control form-control-lg">
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col">
-          <label class="col-sm-4 col-form-label offset-4">Password confirmation</label>
-          <div class="col-sm-4 offset-4 w-25">
-            <input type="password" class="form-control form-control-lg">
-            <div class="form-label bg-warning" style="margin: 10px 0px;">Ошибка (если будет)</div>
-          </div>
-        </div>
-      </div>
-      <div class="row mb-3 offset-sm-5">
-        <div class="col">
-          <button type="submit" class="btn btn-success">Принять</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-</body>
+    </div>
+  </form>
+</div>
 {% endblock %}

@@ -2,44 +2,68 @@
 {% block title %}
 Топ-продавцов
 {% endblock %}
-{% block top %}
-active
-{% endblock %}
 {% block content %}
+  <ul class="nav nav-pills sticky-top bg-dark nav-fill">
+    <li class="nav-item">
+      <a class="nav-link"  href="{% url 'main-page' %}">
+        <span style="font-weight: bold; color: #00FF00">Главная</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'top-sellers' %}"><span style="font-weight: bold; color: #00FF00">Топ продавцов</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'adv-post' %}">
+        <span style="font-weight: bold; color: #00FF00">Разместить объявление</span>
+      </a>
+    </li>
+    {% if not user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'register' %}">
+        <span style="font-weight: bold; color: #00FF00">Регистрация</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'login' %}">
+        <span style="font-weight: bold; color: #00FF00">Войти</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'profile' %}">
+        <span style="font-weight: bold; color: #00FF00">Профиль</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'logout' %}">
+        <span style="font-weight: bold; color: #00FF00">Выйти</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+
   <div class="row">
-    <div class="col" style="margin: 310px;">
+    <div class="col" style="margin: 50px; color: #00FF00">
       <div class="display-2">
-        <span class="badge bg-primary">Топ продавцов на сайте</span>
+        <span class="badge bg-dark">Топ продавцов на сайте</span>
       </div>
     </div>
   </div>
   <div class="container" style="min-height: 452px">
     <ul class="list-group list-group-numbered">
-
+      {% for user in users %}
       <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
-          <div class="fw-bold">Ваня
+          <div class="fw-bold">{{ user }}
           </div>
         </div>
-        <span class="badge bg-primary rounded-pill">2</span>
+        <span class="badge bg-dark rounded-pill">{{ user.adv_count }}</span>
       </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Петя
-          </div>
-        </div>
-        <span class="badge bg-primary rounded-pill">3</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Гоша
-          </div>
-        </div>
-        <span class="badge bg-primary rounded-pill">3</span>
-      </li>
+      {% endfor %}
     </ul>
   </div>
-  <footer style="padding: 100px;" class="bg-primary">
+  <footer style="padding: 100px;" class="bg-dark">
     <nav class="navbar navbar-expand-sm navbar-dark">
       <a class="navbar-brand" href="#">Добавьте</a>
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
